@@ -19,7 +19,7 @@
 
 .container-timeline .form-post {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
 }
 
@@ -98,6 +98,19 @@
 
 .container-timeline .feed-post .post .post-interactions {
     font-size: 12px;
+}
+.action img {
+    width: 20px; 
+    height: 20px;
+    cursor: pointer;   
+}
+
+.confirm-image, .cancel-image {
+    gap: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    right: auto;
 }
 
 @media screen and (min-width: 768px) {

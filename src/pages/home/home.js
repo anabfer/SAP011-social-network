@@ -38,8 +38,10 @@ export const templatePostItem = (id, user, message, likes) => {
                 <i class="icon">deletar post</i>
             </button>
             <button class="action" data-action="edit" data-id="${id}">
-                <i class="icon">editar post</i>
+            <img src="./img/pencil.png" alt="Editar post">
+            <i class="icon"></i>
             </button>
+            </div>
             <button class="action" data-action="like" data-id="${id}">
                 <i class="icon">like action</i>
             </button>
@@ -158,17 +160,51 @@ export async function handleBodyClick(event) {
         alert("Você só pode deletar seus próprios posts");
       }
     },
+    //função editar post parte I
     edit: async () => {
       const docSnap = await getDoc(doc(db, "posts", id));
       if (docSnap.data().userEmail === userEmail) {
-        const newMessage = prompt("Digite uma nova mensagem:");
-        if (newMessage) {
-          await editPostInDb(id, newMessage);
-        }
+        const postElement = document.querySelector(`[data-id="${id}"]`);
+        const postTextElement = postElement.querySelector('.post-text');
+        const textarea = document.createElement("textarea");
+        textarea.value = postTextElement.textContent;
+        textarea.id = `editTextarea-${id}`;
+        postTextElement.replaceWith(textarea);
+    
+        // Adicionar um botão de confirmação
+        const confirmImage = document.createElement("img");
+        confirmImage.src = "./img/done.png";
+        confirmImage.alt = "Confirmar Edição";
+        confirmImage.classList.add("confirm-image");
+        confirmImage.addEventListener("click", async () => {
+          const newMessage = document.getElementById(`editTextarea-${id}`).value;
+          if (newMessage.trim() !== "") {
+            await editPost(id, newMessage);
+            // ...
+          } else {
+            alert("A nova mensagem não pode estar vazia");
+          }
+        });
+        postElement.appendChild(confirmImage);
+    
+        
+        const cancelImage = document.createElement("img");
+        cancelImage.src = "./img/cancelar.png";
+        cancelImage.alt = "Cancelar Edição";
+        cancelImage.classList.add("cancel-image");
+        cancelImage.addEventListener("click", () => {
+          
+         
+          textarea.replaceWith(postTextElement);
+          confirmImage.remove();
+          cancelImage.remove();
+        });
+        postElement.appendChild(cancelImage);
       } else {
         alert("Você só pode editar seus próprios posts");
       }
     },
+    
     like: async () => await updateLike(id),
   };
 
@@ -194,5 +230,28 @@ export function bindEvents() {
   document.body.removeEventListener("click", handleBodyClick);
   document.body.addEventListener("click", handleBodyClick);
 
+  document.querySelectorAll(".action[data-action='edit']").forEach(button => { //evento para editar posts
+    button.addEventListener("click", handleEditPost);
+  });
+
   setupPostsSnapshot();
 }
+//função editar parte II
+export const editPost = async (id, newMessage) => {
+  try {
+    const postRef = doc(db, "posts", id);
+
+    await updateDoc(postRef, {
+      message: newMessage,
+      updatedAt: new Date()
+    });
+
+    console.log("Post editado com sucesso!");
+  } catch (e) {
+    console.error("Error editing document: ", e);
+  }
+};
+
+
+
+

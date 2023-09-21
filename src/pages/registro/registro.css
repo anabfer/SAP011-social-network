@@ -178,22 +178,20 @@ input.error-input {
 #register-button:placeholder {
     color: white;
 }
+#texto-registro {
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+}
 
 a:link {
-    color: rgb(88, 85, 85);
+    color: white;
 }
 
 a:hover {
     color: rgb(41, 153, 22);
 }
 
-
-#logo-registro {
-    text-align: start;
-    /* margin-top: 100px; */
-    margin-left: 300px;
-    background-color: #7ed957;
-}
 
 @media screen and (min-width: 1024px) {
 
