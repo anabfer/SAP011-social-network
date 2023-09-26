@@ -5,7 +5,9 @@ export default () => {
     <header class="header-page">
       <span id="container-user">
         <img src="./img/MaleUser.png" alt="user" class="icons">
+        
         <p id="user-name"></p>
+      
       </span>
     </header>
     <main class="container-timeline">
@@ -15,13 +17,13 @@ export default () => {
       </section>
       <section class="feed-post"></section>
     </main> 
-   <footer>
-     <span id="containerIcons">
-       <a href="./#"><img src="./img/Home.png" alt="home" class="icons"></a>
-       <a href="./#about"><img src="./img/Heart.png" alt="heart" class="icons"></a>
-       <a data-logout><img src="./img/Logout.png" alt="logout" class="icons"></a>
-     </span>
-   </footer> 
+    <footer>
+    <span id="containerIcons">
+      <a href="./#"><img src="./img/Home.png" alt="home" class="icons"></a>
+      <a href="./#about"><img src="./img/Heart.png" alt="heart" class="icons"></a>
+      <a data-logout><img src="./img/Logout.png" alt="logout" class="icons"></a>
+    </span>
+  </footer> 
      `;
   container.innerHTML = template;
   return container;
