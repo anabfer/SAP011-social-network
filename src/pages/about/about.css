@@ -1,8 +1,8 @@
 *{
     margin: 0;
 }
-.about{
-    height: 100vh;
+.body{
+    min-height: 100vh;
 }
 .container-about{
     display: flex;
@@ -32,7 +32,7 @@ background-color: #7ED957;
     .container-about{
         flex-direction: row;
         justify-content: space-evenly;
-        height: 81vh;
+        min-height: 90vh;
     }
     .about-img{
         width: 35vw;
